@@ -8,6 +8,7 @@ var speed = 300;
 
 document.body.style.background = "#659DBD";
 
+//locations of cell neighbors
 const operations = [
   [0, 1],
   [0, -1],
@@ -19,6 +20,10 @@ const operations = [
   [-1, 0]
 ];
 
+
+/*
+Resets given grid to blank states
+*/
 const generateEmptyGrid = () => {
   const rows = [];
   for (let i = 0; i < numRows; i++) {
@@ -28,6 +33,9 @@ const generateEmptyGrid = () => {
   return rows;
 };
   
+/*
+Preset for Grid 1
+*/
 const generateGrid1 = () => {
   const rows = [];
   for (let i = 0; i < numRows; i++) {
@@ -47,6 +55,10 @@ const generateGrid1 = () => {
   return rows;
 };
 
+/*
+Preset for Grid 2
+*/
+
 const generateGrid2 = () => {
   const rows = [];
   for (let i = 0; i < numRows; i++) {
@@ -57,14 +69,21 @@ const generateGrid2 = () => {
   return rows;
 };
 
+/*
+Increases speed of simulation
+*/
 function increaseSpeed(){
   speed = speed - 50;
 }
-
+/*
+Decreases speed of simulation
+*/
 function decreaseSpeed(){
   speed = speed + 50;
 }
-
+/*
+Increases amount of rows by 1
+*/
 function increaseRows(){
   numRows = numRows + 1;
 
@@ -76,7 +95,9 @@ function increaseRows(){
   return rows;
   
 }
-
+/*
+Decreases amouunt of rows by 1
+*/
 function decreaseRows(){
   numRows = numRows - 1;
 
@@ -88,7 +109,9 @@ function decreaseRows(){
   return rows;
   
 }
-
+/*
+Decreases amount of columns by 1
+*/
 function decreaseCols(){
   numCols = numCols - 1;
 
@@ -100,7 +123,9 @@ function decreaseCols(){
   return rows;
   
 }
-
+/*
+Increases amount of columns by 1
+*/
 function increaseCols(){
   numCols = numCols + 1;
 
@@ -112,6 +137,17 @@ function increaseCols(){
   return rows;
   
 }
+
+
+/*
+Initializes the grid by pushing an array
+
+setGrid:
+- Allows mutations to the grid
+- Finds out how many neighbors each cell has
+- Determines what happens to alive and dead cells
+
+*/
 
 
 const App: React.FC = () => {
@@ -256,9 +292,14 @@ const App: React.FC = () => {
         Decrease cols
       </Button>
       <Spacer />
+
     </Flex>
-  
       <div
+      /*
+      Styling of grid
+
+      Allows for clicks to change the state of the cell
+      */
         style={{
           display: "grid",
           justifyContent: "center",
@@ -266,7 +307,7 @@ const App: React.FC = () => {
           gridTemplateColumns: `repeat(${numCols}, 20px)`
         }}
       >
-        {grid.map((rows, i) =>
+        {grid.map((rows, i) => 
           rows.map((col, k) => (
             <div
               key={`${i}-${k}`}
